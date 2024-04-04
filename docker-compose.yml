@@ -1,5 +1,8 @@
+name: devops-project-1
 services:
   app:
-    build: .
-    volumes:
-      - "./app:/app"
+    build:
+      context: .
+      dockerfile: ./Dockerfile.production
+    image: ishchts/devops-for-programmers-project-74
+    command: npm run test
