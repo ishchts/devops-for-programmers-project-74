@@ -1,4 +1,4 @@
-name: devops-project-1
+# name: devops-project-1
 services:
   app:
     build:
