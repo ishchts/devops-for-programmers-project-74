@@ -6,3 +6,34 @@ services:
     command: npm run dev
     volumes:
       - "./app:/app"
+  caddy:
+    image: caddy:2.7-alpine
+    restart: unless-stopped
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - $PWD/services/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+      - caddy_config:/config
+
+
+volumes:
+  caddy_data:
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: $PWD/services/caddy/caddy_data
+
+  caddy_config:
+    # driver: local
+    # driver_opts:
+    #   type: none
+    #   o: bind
+    #   device: $PWD/services/caddy/caddy_config
