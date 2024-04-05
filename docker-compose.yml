@@ -6,3 +6,18 @@ services:
       dockerfile: ./Dockerfile.production
     image: ishchts/devops-for-programmers-project-74
     command: npm run test
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      DATABASE_HOST: ${DATABASE_HOST}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_HOST}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data: 
