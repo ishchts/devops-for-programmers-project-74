@@ -5,9 +5,12 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
-    command: bash -c 'sleep 3 && npm start'
+    command: bash -c 'sleep 10 && npm start'
     volumes:
       - "./app:/app"
+    depends_on:
+      - db
+
   
   caddy:
     image: caddy:2.7-alpine
