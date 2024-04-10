@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./Dockerfile.production
     image: ishchts/devops-for-programmers-project-74
-    command: npm run test
+    command: bash -c 'sleep 10 && npm run test'
     environment:
         - DATABASE_HOST=${DATABASE_HOST-db}
         - DATABASE_NAME=${DATABASE_NAME-postgres}
