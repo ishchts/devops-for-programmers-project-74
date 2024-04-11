@@ -1,11 +1,17 @@
 services:
   app:
-    build: ./Dockerfile
+    build:
+      context: .
+      dockerfile: ./Dockerfile
     ports:
       - "8080:8080"
-    command: npm run dev
+    command: bash -c 'sleep 10 && npm start'
     volumes:
       - "./app:/app"
+    depends_on:
+      - db
+
+  
   caddy:
     image: caddy:2.7-alpine
     restart: unless-stopped
@@ -18,7 +24,7 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - $PWD/services/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./services/caddy/Caddyfile:/etc/caddy/Caddyfile
       - caddy_data:/data
       - caddy_config:/config
 
